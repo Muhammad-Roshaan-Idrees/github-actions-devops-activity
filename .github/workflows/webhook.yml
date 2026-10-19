@@ -1,0 +1,25 @@
+
+name: Webhook Workflow
+
+on:
+  repository_dispatch:
+    types:
+      - customwebhook
+
+jobs:
+  webhook-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display webhook message
+        run: echo "Webhook triggered successfully"
+
+      - name: Display event details
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_TYPE: ${{ github.event.action }}
+          MESSAGE: ${{ github.event.client_payload.message }}
+        run: |
+          echo "Event: $EVENT_NAME"
+          echo "Event Type: $EVENT_TYPE"
+          echo "Message: $MESSAGE"
