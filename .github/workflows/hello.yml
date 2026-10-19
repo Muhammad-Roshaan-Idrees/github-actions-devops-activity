@@ -2,17 +2,16 @@
 name: First GitHub Actions Workflow
 
 on:
-    push:
-        branches:
-            - main
-        
+  push:
+    branches:
+      - main
+
 jobs:
-    hello:
-        runs-on: ubuntu-latest
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show greeting
+        run: echo "Hello from GitHub Actions!"
 
-        steps:
-            - name: Show greeting
-              run: echo "Hello from GitHub Actions!"
-
-            - name: Show current date
-              run: date
+      - name: Show current date
+        run: date
