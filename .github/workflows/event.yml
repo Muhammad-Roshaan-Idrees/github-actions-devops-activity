@@ -1,0 +1,26 @@
+
+name: Push and Pull Request
+
+on:
+    push:
+      branches:
+        - main
+        - develop
+
+    pull_request:
+      branches:
+        - main
+        - develop
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Display event information
+              run: echo "Workflow triggered successfully"
+
+            - name: Show triggering event
+              env:
+                EVENT_NAME: ${{ github.event_name }}
+              run: 'echo "Event: $EVENT_NAME"'
