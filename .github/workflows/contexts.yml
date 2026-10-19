@@ -1,0 +1,45 @@
+
+name: Context Objects and Conditionals
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  APP_NAME: DevOpsDemo
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print context information
+        env:
+          ACTOR: ${{ github.actor }}
+          EVENT: ${{ github.event_name }}
+          OS: ${{ runner.os }}
+          REPO: ${{ github.repository }}
+          APP: ${{ vars.APP_NAME }}
+        run: |
+          echo "User: $ACTOR"
+          echo "Event: $EVENT"
+          echo "Operating System: $OS"
+          echo "Repository: $REPO"
+          echo "Application variable: $APP"
+
+      - name: Run after success
+        if: success()
+        run: echo "Previous steps succeeded"
+
+      - name: Run after failure
+        if: failure()
+        run: echo "A previous step failed"
+
+      - name: Always run
+        if: always()
+        run: echo "This step runs regardless of earlier outcomes"
+
+      - name: Check event type
+        if: contains(github.event_name, 'push')
+        run: echo "This was a push event"
