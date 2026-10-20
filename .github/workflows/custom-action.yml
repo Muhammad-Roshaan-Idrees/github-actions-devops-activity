@@ -11,13 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run Hello Action
-        id: hello
-        uses: Muhammad-Roshaan-Idrees/hello-action@v1.0.0
+      - name: Run my custom action
+        uses: Muhammad-Roshaan-Idrees/hello-action@v1.0.1
         with:
           name: Roshaan Idrees
-
-      - name: Display Greeting
-        env:
-          GREETING: ${{ steps.hello.outputs.greeting }}
-        run: echo "$GREETING"
