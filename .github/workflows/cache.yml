@@ -1,0 +1,28 @@
+
+name: Dependency Cache
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python with pip cache
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Confirm installed package
+        run: python -c "import requests; print('Requests installed successfully')"
